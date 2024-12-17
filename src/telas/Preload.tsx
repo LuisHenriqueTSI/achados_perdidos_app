@@ -13,7 +13,7 @@ export default function Preload({navigation}: any) {
     useContext<any>(AuthContext);
   const {getUser} = useContext<any>(UserContext);
   const [dialogVisivel, setDialogVisivel] = useState(false);
-  const [mensagemErro, setMensagemErro] = useState(
+  const [mensagemErro, _setMensagemErro] = useState(
     'Você precisa verificar seu email para continuar',
   );
 

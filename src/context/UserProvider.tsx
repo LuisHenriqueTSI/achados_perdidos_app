@@ -31,7 +31,6 @@ export const UserProvider = ({children}: any) => {
               email: doc.data().email,
               nome: doc.data().nome,
               urlFoto: doc.data().urlFoto,
-              curso: doc.data().curso,
               perfil: doc.data().perfil,
             });
           });
@@ -55,7 +54,6 @@ export const UserProvider = ({children}: any) => {
               email: doc.data().email,
               nome: doc.data().nome,
               urlFoto: doc.data().urlFoto,
-              curso: doc.data().curso,
               perfil: doc.data().perfil,
             });
           });
@@ -78,7 +76,6 @@ export const UserProvider = ({children}: any) => {
         }
       }
       const usuarioFirestore = {
-        curso: usuario.curso,
         email: usuario.email,
         nome: usuario.nome,
         perfil: usuario.perfil,

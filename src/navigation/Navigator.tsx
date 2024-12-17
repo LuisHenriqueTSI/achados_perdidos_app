@@ -1,45 +1,30 @@
-/* eslint-disable react/no-unstable-nested-components */
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
 import {StatusBar} from 'react-native';
 import {Icon, useTheme} from 'react-native-paper';
-import AlteraSenha from '../telas/AlteraSenha';
-import AlunoTela from '../telas/AlunoTela';
-import Alunos from '../telas/Alunos';
-import EmpresaTela from '../telas/EmpresaTela';
-import Empresas from '../telas/Empresas';
-import EsqueceuSenha from '../telas/EsqueceuSenha';
 import Menu from '../telas/Menu';
-import Perfil from '../telas/PerfilTela';
-import Preload from '../telas/Preload';
-import ProfessorTela from '../telas/ProfessorTela';
-import Professores from '../telas/Professores';
+import ItensTela from '../telas/ItensTela'; // Tela para listar itens
+import AdicionarItemTela from '../telas/AdicionarItemTela'; // Tela para adicionar item perdido/encontrado
+import PerfilTela from '../telas/PerfilTela';
 import SignIn from '../telas/SignIn';
-import SignUp from '../telas/SignUp';
+import AlterarSenha from '../telas/AlteraSenha';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
-const AuthStack = () => (
-  <Stack.Navigator
-    initialRouteName="Preload"
-    screenOptions={{
-      headerShown: false,
-    }}>
-    <Stack.Screen component={Preload} name="Preload" />
-    <Stack.Screen component={SignIn} name="SignIn" />
-    <Stack.Screen component={SignUp} name="SignUp" />
-    <Stack.Screen component={EsqueceuSenha} name="EsqueceuSenha" />
-  </Stack.Navigator>
-);
-
 const AppStack = () => {
   const theme = useTheme();
+  const ItensIcon = () => (
+    <Icon source="clipboard-list" color={theme.colors.primary} size={20} />
+  );
+  const MenuIcon = () => (
+    <Icon source="menu" color={theme.colors.primary} size={20} />
+  );
   return (
     <Tab.Navigator
-      initialRouteName="Alunos"
+      initialRouteName="Itens"
       screenOptions={() => ({
         tabBarActiveTintColor: theme.colors.primary,
         tabBarInactiveTintColor: 'gray',
@@ -47,45 +32,11 @@ const AppStack = () => {
         tabBarStyle: {backgroundColor: theme.colors.surface},
       })}>
       <Tab.Screen
-        component={Alunos}
-        name="Alunos"
+        component={ItensTela}
+        name="Itens"
         options={{
-          tabBarLabel: 'Alunos',
-          tabBarIcon: () => (
-            <Icon
-              source="account-group"
-              color={theme.colors.primary}
-              size={20}
-            />
-          ),
-        }}
-      />
-      <Tab.Screen
-        component={Professores}
-        name="Professores"
-        options={{
-          tabBarLabel: 'Professores',
-          tabBarIcon: () => (
-            <Icon
-              source="account-tie-hat"
-              color={theme.colors.primary}
-              size={20}
-            />
-          ),
-        }}
-      />
-      <Tab.Screen
-        component={Empresas}
-        name="Empresas"
-        options={{
-          tabBarLabel: 'Empresas',
-          tabBarIcon: () => (
-            <Icon
-              source="office-building-outline"
-              color={theme.colors.primary}
-              size={20}
-            />
-          ),
+          tabBarLabel: 'Itens',
+          tabBarIcon: ItensIcon,
         }}
       />
       <Tab.Screen
@@ -93,9 +44,7 @@ const AppStack = () => {
         name="Menu"
         options={{
           tabBarLabel: 'Menu',
-          tabBarIcon: () => (
-            <Icon source="menu" color={theme.colors.primary} size={20} />
-          ),
+          tabBarIcon: MenuIcon,
         }}
       />
     </Tab.Navigator>
@@ -112,35 +61,26 @@ export default function Navigator() {
         }
       />
       <Stack.Navigator
-        initialRouteName="AuthStack"
+        initialRouteName="SignIn" // Tela de login será a inicial
         screenOptions={{
           headerShown: false,
         }}>
-        <Stack.Screen component={AuthStack} name="AuthStack" />
-        <Stack.Screen component={AppStack} name="AppStack" />
+        {/* Tela de Login */}
+        <Stack.Screen name="SignIn" component={SignIn} />
+
+        {/* Stack para as telas do app após login */}
+        <Stack.Screen name="AppStack" component={AppStack} />
+
+        {/* Outras telas */}
         <Stack.Screen
-          component={AlunoTela}
-          name="AlunoTela"
+          name="AdicionarItemTela"
+          component={AdicionarItemTela}
           options={{
             presentation: 'modal',
           }}
         />
-        <Stack.Screen
-          component={ProfessorTela}
-          name="ProfessorTela"
-          options={{
-            presentation: 'modal',
-          }}
-        />
-        <Stack.Screen
-          component={EmpresaTela}
-          name="EmpresaTela"
-          options={{
-            presentation: 'modal',
-          }}
-        />
-        <Stack.Screen component={Perfil} name="Perfil" />
-        <Stack.Screen component={AlteraSenha} name="AlteraSenha" />
+        <Stack.Screen name="Perfil" component={PerfilTela} />
+        <Stack.Screen name="AlterarSenha" component={AlterarSenha} />
       </Stack.Navigator>
     </NavigationContainer>
   );

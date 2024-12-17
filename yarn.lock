@@ -2898,6 +2898,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-native-picker/picker@npm:^2.10.2":
+  version: 2.10.2
+  resolution: "@react-native-picker/picker@npm:2.10.2"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: b0da314c10fd35db920f891f0e5d45807a8e2c4e5693512308af5685ba2abfb08a0af7d39c8249da6fc7a935f1974e513fc7f4522a278caa48b0fc3c16f31038
+  languageName: node
+  linkType: hard
+
 "@react-native/assets-registry@npm:0.75.4":
   version: 0.75.4
   resolution: "@react-native/assets-registry@npm:0.75.4"
@@ -8563,6 +8573,7 @@ __metadata:
     "@react-native-firebase/auth": ^21.3.0
     "@react-native-firebase/firestore": 21.3.0
     "@react-native-firebase/storage": 21.3.0
+    "@react-native-picker/picker": ^2.10.2
     "@react-native/babel-preset": 0.75.4
     "@react-native/eslint-config": 0.75.4
     "@react-native/metro-config": 0.75.4

@@ -47,13 +47,19 @@ export const AuthProvider = ({children}: any) => {
   */
   async function signUp(usuario: Usuario): Promise<string> {
     try {
-      await auth().createUserWithEmailAndPassword(usuario.email, usuario.senha);
+      if (usuario.email && usuario.senha) {
+        await auth().createUserWithEmailAndPassword(
+          usuario.email,
+          usuario.senha,
+        );
+      } else {
+        throw new Error('Email ou senha não fornecidos');
+      }
       await auth().currentUser?.sendEmailVerification();
       const usuarioFirestore = {
         email: usuario.email,
         nome: usuario.nome,
         urlFoto: usuario.urlFoto,
-        curso: usuario.curso,
         perfil: usuario.perfil,
       };
       await firestore()

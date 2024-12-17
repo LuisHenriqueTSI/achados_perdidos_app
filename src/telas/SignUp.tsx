@@ -6,9 +6,6 @@ import {Button, Dialog, Text, TextInput, useTheme} from 'react-native-paper';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import * as yup from 'yup';
 import {AuthContext} from '../context/AuthProvider';
-import {Curso} from '../model/Curso';
-import {Perfil} from '../model/Perfil';
-import {Usuario} from '../model/Usuario';
 
 const requiredMessage = 'Campo obrigatório';
 
@@ -54,6 +51,7 @@ export default function SignUp({navigation}: any) {
     mode: 'onSubmit',
     resolver: yupResolver(schema),
   });
+
   const [exibirSenha, setExibirSenha] = useState(true);
   const [requisitando, setRequisitando] = useState(false);
   const [dialogVisivel, setDialogVisivel] = useState(false);
@@ -67,18 +65,19 @@ export default function SignUp({navigation}: any) {
     register('confirmar_senha');
   }, [register]);
 
-  async function onSubmit(data: Usuario) {
+  async function onSubmit(data: any) {
     setRequisitando(true);
+    // Simulação de foto de perfil
     data.urlFoto =
       'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50';
-    data.curso = Curso.CSTSI;
-    data.perfil = Perfil.Aluno;
+
+    // Simulação de cadastro do usuário no banco de dados
     const msg = await signUp(data);
     if (msg === 'ok') {
       setMensagem({
         tipo: 'ok',
         mensagem:
-          'Show! Você foi cadastrado com sucesso. Verifique seu email para validar sua conta.',
+          'Você foi cadastrado com sucesso! Verifique seu email para validar sua conta.',
       });
       setDialogVisivel(true);
       setRequisitando(false);
@@ -104,7 +103,7 @@ export default function SignUp({navigation}: any) {
               mode="outlined"
               icon="image"
               onPress={() =>
-                Alert.alert('Vamos ver isso em upload de imagens')
+                Alert.alert('Função de upload de imagens em breve')
               }>
               Galeria
             </Button>
@@ -113,7 +112,7 @@ export default function SignUp({navigation}: any) {
               mode="outlined"
               icon="camera"
               onPress={() =>
-                Alert.alert('Vamos ver isso em upload de imagens')
+                Alert.alert('Função de upload de imagens em breve')
               }>
               Foto
             </Button>
@@ -137,7 +136,7 @@ export default function SignUp({navigation}: any) {
             )}
             name="nome"
           />
-          {errors.email && (
+          {errors.nome && (
             <Text style={{...styles.textError, color: theme.colors.error}}>
               {errors.nome?.message?.toString()}
             </Text>
@@ -185,7 +184,7 @@ export default function SignUp({navigation}: any) {
                 right={
                   <TextInput.Icon
                     icon="eye"
-                    onPress={() => setExibirSenha(previus => !previus)}
+                    onPress={() => setExibirSenha(prev => !prev)}
                   />
                 }
               />
@@ -197,6 +196,7 @@ export default function SignUp({navigation}: any) {
               {errors.senha?.message?.toString()}
             </Text>
           )}
+
           <Controller
             control={control}
             render={({field: {onChange, onBlur, value}}) => (
@@ -214,7 +214,7 @@ export default function SignUp({navigation}: any) {
                 right={
                   <TextInput.Icon
                     icon="eye"
-                    onPress={() => setExibirSenha(previus => !previus)}
+                    onPress={() => setExibirSenha(prev => !prev)}
                   />
                 }
               />
@@ -226,6 +226,7 @@ export default function SignUp({navigation}: any) {
               {errors.confirmar_senha?.message?.toString()}
             </Text>
           )}
+
           <Button
             style={styles.button}
             mode="contained"
@@ -287,7 +288,6 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end',
     marginTop: 20,
   },
-  textCadastro: {},
   textError: {
     width: 350,
   },
