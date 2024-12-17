@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "857500191384",
+    "project_id": "achados-perdidos-a459b",
+    "storage_bucket": "achados-perdidos-a459b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:857500191384:android:e1ad6f0dbfff1122051eed",
+        "android_client_info": {
+          "package_name": "com.pdm_exemplo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdi1A1GhWXMe7PTJefGDZR-1uQwcuykRE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
